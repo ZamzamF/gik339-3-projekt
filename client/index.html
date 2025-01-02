@@ -31,10 +31,41 @@
               <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </div>
           </div>
+           <!-- test för att ta sig till varukorg: -->
+          <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cartModal">Varukorg</button>
 
         </div>
-
-      </nav>
-    
+    </nav>
+        <!-- Varukorgen -->
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content cart-modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="cartModalLabel">Varukorg</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <table class="table">
+                          <thead>
+                              <tr>
+                                  <th>Produkt</th>
+                                  <th>Pris</th>
+                                  <th>Antal</th>
+                                  <th>Total</th>
+                              </tr>
+                          </thead>
+                          <tbody id="cart-items">
+                              <!-- produkter man lagt i varukorg kommer här -->
+                          </tbody>
+                      </table>
+                      <button class="btn btn-secondary continue-shopping-btn" onclick="closeCart()">Fortsätt handla</button>
+                      <button class="btn btn-primary checkout-btn" onclick="goToCheckout()">Gå till kassan</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+      <script src="script.js"></script>
 </body>
 </html>
