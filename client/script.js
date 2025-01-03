@@ -70,6 +70,16 @@ function closeCart() {
     cartModal.hide();
 }
 
+    // Stäng varukorgen  när man trycker på fortsätt handla 
+function closeCartAndReturn() {
+    const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+    cartModal.hide();
+
+    // Navigera tillbaka till startsidan
+    window.location.href = "index.html"; 
+}
+
+
 //  gå till kassan
 function goToCheckout() {
     alert('Du är nu framme i kassan');
@@ -101,5 +111,25 @@ function renderProductList() {
     });
 }
 
+function renderProductList() {
+    const productListContainer = document.getElementById('product-list');
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.classList.add('col-4');
+        productCard.innerHTML = `
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text">${product.price} SEK</p>
+                    <button class="btn btn-primary" onclick="addToCart(${product.id})">Lägg till</button>
+                </div>
+            </div>
+        `;
+        productListContainer.appendChild(productCard);
+    });
+}
+
+
 // renderar produktlistan
 renderProductList();
+
