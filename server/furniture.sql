@@ -13,6 +13,9 @@ INSERT INTO furniture (furnitureName, modelName, color, category, price, image)
 VALUES 
    ('Bed', 'Anja', 'Oak', 'Bedroom', 20000.00, 'client/Bilder/Sovrum/bed.jpg'),
    ('Stool', 'Kajsa', 'Oak', 'Kitchen', 500.00, 'client/Bilder/Kök/Stool.jpg'),
-   ('Sofa', 'Bertil', 'Grå', 'Livingroom', 15000.00, 'client/Bilder/Vardagsrum/Sofa.jpg');
+   ('Sofa', 'Bertil', 'Beige', 'Livingroom', 15000.00, 'client/Bilder/Vardagsrum/Sofa.jpg'),
+   ('Chair', 'Sofia', 'Oak', 'Livingroom', 10000.00, 'client\Bilder\Vardagsrum\chair.jpg'),
+   ('Hatch', 'Anna', 'Oak', 'Kitchen', 1600.00, 'client\Bilder\Kök\hatch.jpg'),
+   ('Lamp', 'Johannes', 'White', 'Bedroom', 500.00, 'client\Bilder\Sovrum\lamp.jpg');
 
 SELECT * FROM furniture;
