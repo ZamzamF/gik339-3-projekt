@@ -103,3 +103,29 @@ function renderProductList() {
 
 // renderar produktlistan
 renderProductList();
+
+// Formulär
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('resourceForm');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); 
+
+      // Hämta data från formuläret
+      const formData = {
+        fname: document.getElementById('fname').value,
+        ename: document.getElementById('ename').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        password: document.getElementById('password').value
+      };
+
+      console.log('Formulärdata:', formData);
+
+      // Rensa formuläret 
+      alert('Formuläret skickades!');
+      form.reset();
+      const modal = bootstrap.Modal.getInstance(document.getElementById('resourceFormModal'));
+      modal.hide();
+    });
+  });
