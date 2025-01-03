@@ -72,7 +72,7 @@ function closeCart() {
 
 //  gå till kassan
 function goToCheckout() {
-    alert('Framme i kassan');
+    alert('Du är nu framme i kassan');
    
 }
 
