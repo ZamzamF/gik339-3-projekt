@@ -1,3 +1,15 @@
+
+//1. Exemple data:
+const testProducts = [
+    { name: "Bed", category: "Bedroom", price: 500 },
+    { name: "Wardrobe", category: "Bedroom", price: 300 },
+    { name: "Cooking Set", category: "Kitchen", price: 150 },
+    { name: "Blender", category: "Kitchen", price: 80 },
+    { name: "Sofa", category: "Livingroom", price: 700 },
+    { name: "Coffee Table", category: "Livingroom", price: 200 }
+  ];
+
+
 // Ev lista med produkter från databasen 
 let products = [
     { id: 1, name: "Produkt A", price: 100 },
@@ -129,3 +141,31 @@ renderProductList();
       modal.hide();
     });
   });
+
+
+
+
+
+// ------------------- Dynamiskt rendering av test produkter ---------
+
+
+//Dynamiskt rendering av producter
+function showAllProducts(){
+    const fullProductList = document.getElementById("product-containerr");
+
+    // Töm innehållet i behållaren först
+  fullProductList.innerHTML = "";
+
+  testProducts.forEach((product) => {
+        const productCard = `
+      <div class="card" style="width: 18rem; margin: 10px;">
+        <div class="card-body">
+          <h5 class="card-title">${product.name}</h5>
+          <p class="card-text">Category: ${product.category}</p>
+          <p class="card-text">Price: $${product.price}</p>
+        </div>
+      </div>
+    `;
+    fullProductList.innerHTML += productCard;
+    });
+}
