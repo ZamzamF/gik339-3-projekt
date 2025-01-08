@@ -47,6 +47,14 @@ app.get('/furniture', (req, res) =>{
     }) 
 })
 
+//get-route id/kategor
+
+//put-route  - uppdater
+
+//post-route - skapa
+
+//delete-route - tabort
+
 
 
 /* app.use(express.json()); */
