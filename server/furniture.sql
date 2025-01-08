@@ -18,4 +18,4 @@ VALUES
    ('Hatch', 'Anna', 'Oak', 'Kitchen', 1600.00, 'client\Bilder\Kök\hatch.jpg'),
    ('Lamp', 'Johannes', 'White', 'Bedroom', 500.00, 'client\Bilder\Sovrum\lamp.jpg');
 
-SELECT * FROM furniture;
+SELECT * FROM furniture; 

@@ -1,17 +1,37 @@
+
+/*
+Att göra: Utnyttja  get-routen på rad 30 i frontenden via fetch-Api. 
+När användaren trycker på Browse länken/ikonen ladda alla produkter i databasen. 
+
+*/ 
+
+
+
+
+
 const sqlite3 = require('sqlite3').verbose(); // Importerar sqlite3
 const express = require('express'); // Importerar express 
 const app = express(); // Skapar en express-variabel 
 const db = new sqlite3.Database('./furniture.db') // Skapar databaskoppling
+
+const cors = require('cors');
+app.use(cors());
+
+
+
+
 
 // Kontrollerar databaskopplingen i konsolen 
 db.all('SELECT * FROM furniture', (e, rows) => 
     console.log(rows)
 );
 
+
 // Skapar porten 3000
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
+
 
 /* Skapar get-api med databasen som endpoint för att testa databaskopplingen i porten*/
 app.get('/furniture', (req, res) =>{
@@ -24,6 +44,8 @@ app.get('/furniture', (req, res) =>{
         }
     }) 
 })
+
+
 
 /* app.use(express.json()); */
 

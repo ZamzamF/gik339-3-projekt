@@ -1,24 +1,14 @@
 
-//1. Exemple data:
-const testProducts = [
-    { name: "Bed", category: "Bedroom", price: 500, img: 'Bilder/Sovrum/bed.jpg'},
-    { name: "Wardrobe", category: "Bedroom", price: 300, img: "Bilder/Sovrum/iwood-R5v8Xtc0ecg-unsplash.jpg" },
-    { name: "Cooking Set", category: "Kitchen", price: 150,img: "Bilder/Kök/hatch.jpg"},
-    { name: "Blender", category: "Kitchen", price: 80, img: "Bilder/Kök/Stool.jpg" },
-    { name: "Sofa", category: "Livingroom", price: 700, img: "Bilder/Vardagsrum/aaina-sharma-J8iOJZEPFQ4-unsplash.jpg" },
-    { name: "Coffee Table", category: "Livingroom", price: 200, img: "Bilder/Vardagsrum/Sofa.jpg" }
-  ];
-
-
-// Ev lista med produkter från databasen 
+ //Ev lista med produkter från databasen 
 let products = [
     { id: 1, name: "Produkt A", price: 100 },
     { id: 2, name: "Produkt B", price: 200 },
     { id: 3, name: "Produkt C", price: 300 },
 ];
 
+
 // Varukorgens data
-let cart = [];
+let cart = []; 
 
 // Lägg till produkt i varukorgen
 function addToCart(productId) {
@@ -104,7 +94,7 @@ function openCart() {
     cartModal.show();
 }
 
-// fyller i om produkterna ska visas
+/* fyller i om produkterna ska visas
 function renderProductList() {
     const productListContainer = document.getElementById('product-list');
     products.forEach(product => {
@@ -122,6 +112,7 @@ function renderProductList() {
         productListContainer.appendChild(productCard);
     });
 }
+    */
 
 function renderProductList() {
     const productListContainer = document.getElementById('product-list');
@@ -143,7 +134,7 @@ function renderProductList() {
 
 
 // renderar produktlistan
-renderProductList();
+//renderProductList();
 
 // Formulär
   document.addEventListener('DOMContentLoaded', () => {
@@ -177,33 +168,51 @@ renderProductList();
 
 // ------------------- Dynamiskt rendering av test produkter ---------
 //Dynamiskt rendering av producter
-function showAllProducts(){
-    const fullProductList = document.getElementById("product-containerr");
 
+//Denna funktion lyssnar efter click-händelser. Vid dessa anropas 
+async function fetchAllProducts(){
+    // Hämtar upp det element som agerar som behållare för alla produkter
+    const fullProductList = document.getElementById("all-products-container");
     // Töm innehållet i behållaren först
   fullProductList.innerHTML = "";
 
-  testProducts.forEach((product) => {
-        const productCard = `
-<div class="card position-relative m-3" style="width: 12rem;">  
-
-    <!-- "Save"-etikett uppe till höger -->
-    <div class="position-absolute top-0 end-0 bg-white text-secondary px-2 py-1 m-1 border border-1 rounded save-badge">
-        Save
-    </div>
-
-    <!-- Product bild --> 
-    <img src="${product.img}" class="card-img-top mx-auto  mt-3" alt="${product.name}" style="width: 80%; height: auto; object-fit: contain;">
+  try {
 
 
-    <div class="card-body text-center">
-        <h5 class="card-title">${product.name}</h5>
-        <p class="card-text fw-semibold">Price: $${product.price}</p>
-        
-    </div>
-</div>
-    `;
-    fullProductList.innerHTML += productCard;
+    //Skapar HTTP-GET-Förfrågan. Lagrar object-data i variabeln response
+    const response = await fetch("http://localhost:3000/furniture");  
+    //Översätter object-data till json-format.
+    const fetchedProducts = await response.json();
+
+    //Renderar ut prdukterna 
+    fetchedProducts.forEach((product) => {
+        const productCards = `
+        <div class="card position-relative m-3" style="width: 12rem;">  
+
+            <!-- "Save"-etikett uppe till höger -->
+            <div class="position-absolute top-0 end-0 bg-white text-secondary px-2 py-1 m-1 border border-1 rounded save-badge">
+                Save
+            </div>
+
+            <!-- Product bild --> 
+            <img src="${product.image}" class="card-img-top mx-auto  mt-3" alt="${product.name}" style="width: 80%; height: auto; object-fit: contain;">
+
+
+            <div class="card-body text-center">
+                <h5 class="card-title">${product.furnitureName}</h5>
+                <p class="card-text fw-semibold">Price: $${product.price}</p>
+                
+            </div>
+        </div>
+        `;
+    fullProductList.innerHTML += productCards;
     });
+
+  } catch (error) {  
+    console.log("OBS! Produkterna gick inte att hämta ut!", error);
 }
+}
+
+//anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
+document.addEventListener("DOMContentLoaded", fetchAllProducts);
 
