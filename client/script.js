@@ -1,3 +1,15 @@
+
+//1. Exemple data:
+const testProducts = [
+    { name: "Bed", category: "Bedroom", price: 500, img: 'Bilder/Sovrum/bed.jpg'},
+    { name: "Wardrobe", category: "Bedroom", price: 300, img: "Bilder/Sovrum/iwood-R5v8Xtc0ecg-unsplash.jpg" },
+    { name: "Cooking Set", category: "Kitchen", price: 150,img: "Bilder/Kök/hatch.jpg"},
+    { name: "Blender", category: "Kitchen", price: 80, img: "Bilder/Kök/Stool.jpg" },
+    { name: "Sofa", category: "Livingroom", price: 700, img: "Bilder/Vardagsrum/aaina-sharma-J8iOJZEPFQ4-unsplash.jpg" },
+    { name: "Coffee Table", category: "Livingroom", price: 200, img: "Bilder/Vardagsrum/Sofa.jpg" }
+  ];
+
+
 // Ev lista med produkter från databasen 
 let products = [
     { id: 1, name: "Produkt A", price: 100 },
@@ -132,4 +144,66 @@ function renderProductList() {
 
 // renderar produktlistan
 renderProductList();
+
+// Formulär
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('resourceForm');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); 
+
+      // Hämta data från formuläret
+      const formData = {
+        fname: document.getElementById('fname').value,
+        ename: document.getElementById('ename').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        password: document.getElementById('password').value
+      };
+
+      console.log('Formulärdata:', formData);
+
+      // Rensa formuläret 
+      alert('Formuläret skickades!');
+      form.reset();
+      const modal = bootstrap.Modal.getInstance(document.getElementById('resourceFormModal'));
+      modal.hide();
+    });
+  });
+
+
+
+
+
+// ------------------- Dynamiskt rendering av test produkter ---------
+//Dynamiskt rendering av producter
+function showAllProducts(){
+    const fullProductList = document.getElementById("product-containerr");
+
+    // Töm innehållet i behållaren först
+  fullProductList.innerHTML = "";
+
+  testProducts.forEach((product) => {
+        const productCard = `
+<div class="card position-relative m-3" style="width: 12rem;">  
+
+    <!-- "Save"-etikett uppe till höger -->
+    <div class="position-absolute top-0 end-0 bg-white text-secondary px-2 py-1 m-1 border border-1 rounded save-badge">
+        Save
+    </div>
+
+    <!-- Product bild --> 
+    <img src="${product.img}" class="card-img-top mx-auto  mt-3" alt="${product.name}" style="width: 80%; height: auto; object-fit: contain;">
+
+
+    <div class="card-body text-center">
+        <h5 class="card-title">${product.name}</h5>
+        <p class="card-text fw-semibold">Price: $${product.price}</p>
+        
+    </div>
+</div>
+    `;
+    fullProductList.innerHTML += productCard;
+    });
+}
 
