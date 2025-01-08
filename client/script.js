@@ -195,7 +195,7 @@ async function fetchAllProducts(){
             </div>
 
             <!-- Product bild --> 
-            <img src="${product.image}" class="card-img-top mx-auto  mt-3" alt="${product.name}" style="width: 80%; height: auto; object-fit: contain;">
+            <img src="/${product.image}" class="card-img-top mx-auto  mt-3" alt="${product.furnitureName}" style="width: 80%; height: auto; object-fit: contain;">
 
 
             <div class="card-body text-center">

@@ -16,6 +16,8 @@ const db = new sqlite3.Database('./furniture.db') // Skapar databaskoppling
 
 const cors = require('cors');
 app.use(cors());
+app.use('/client', express.static('client'));
+
 
 
 
