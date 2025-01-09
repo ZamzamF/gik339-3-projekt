@@ -216,12 +216,6 @@ async function fetchAllProducts(){
 //anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
 document.addEventListener("DOMContentLoaded", fetchAllProducts);
 
-
-Här är den kompletta koden som du kan använda för att lägga till en DELETE-route i din server.js samt den tillhörande JavaScript-koden i script.js för att radera en möbel från databasen.
-
-Uppdaterad server.js (server-sidan)
-javascript
-Kopiera kod
 const sqlite3 = require('sqlite3').verbose(); // Importerar sqlite3
 const express = require('express'); // Importerar express
 const cors = require('cors'); // Importerar CORS
