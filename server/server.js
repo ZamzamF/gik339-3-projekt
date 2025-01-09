@@ -54,6 +54,20 @@ app.get('/furniture', (req, res) =>{
 //post-route - skapa
 
 //delete-route - tabort
+app.delete('/furniture/:id', (req, res) => {
+    const furnitureId = req.params.id;
+    const sql = 'DELETE FROM furniture WHERE id = ?';
+
+    db.run(sql, [furnitureId], function (err) {
+        if (err) {
+            res.status(500).send('Fel vid radering: ' + err.message);
+        } else if (this.changes === 0) {
+            res.status(404).send('Möbeln med inmatat ID hittades inte.');
+        } else {
+            res.status(200).send(`Möbeln med ID ${furnitureId} har tagits bort.`);
+        }
+    });
+});
 
 
 

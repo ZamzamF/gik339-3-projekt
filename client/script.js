@@ -216,3 +216,75 @@ async function fetchAllProducts(){
 //anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
 document.addEventListener("DOMContentLoaded", fetchAllProducts);
 
+
+Här är den kompletta koden som du kan använda för att lägga till en DELETE-route i din server.js samt den tillhörande JavaScript-koden i script.js för att radera en möbel från databasen.
+
+Uppdaterad server.js (server-sidan)
+javascript
+Kopiera kod
+const sqlite3 = require('sqlite3').verbose(); // Importerar sqlite3
+const express = require('express'); // Importerar express
+const cors = require('cors'); // Importerar CORS
+const app = express(); // Skapar en express-variabel
+
+app.use(cors());
+app.use(express.json()); // För att hantera JSON-data från klienten
+app.use('/client', express.static('client')); // Statisk mapp för klientfiler
+
+const db = new sqlite3.Database('./furniture.db', (err) => {
+    if (err) {
+        console.error('Kunde inte ansluta till databasen:', err.message);
+    } else {
+        console.log('Ansluten till SQLite-databasen.');
+    }
+});
+
+// Hämta alla möbler (GET)
+app.get('/furniture', (req, res) => {
+    const sql = 'SELECT * FROM furniture';
+    db.all(sql, (err, rows) => {
+        if (err) {
+            res.status(500).send(err.message);
+        } else {
+            res.send(rows);
+        }
+    });
+});
+
+// Ta bort en möbel (DELETE)
+app.delete('/furniture/:id', (req, res) => {
+    const furnitureId = req.params.id;
+    const sql = 'DELETE FROM furniture WHERE id = ?';
+
+    db.run(sql, [furnitureId], function (err) {
+        if (err) {
+            res.status(500).send('Fel vid radering: ' + err.message);
+        } else if (this.changes === 0) {
+            res.status(404).send('Möbeln med angivet ID hittades inte.');
+        } else {
+            res.status(200).send(`Möbeln med ID ${furnitureId} har tagits bort.`);
+        }
+    });
+});
+
+// Startar servern
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});
+
+// Radera möbel via formuläret
+function deleteFurniture(id) {
+    fetch(`http://localhost:3000/furniture/${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log(`Möbeln med ID ${id} har tagits bort.`);
+            alert(`Möbeln med ID ${id} har tagits bort.`);
+            fetchFurniture(); // Uppdatera listan efter radering
+        } else {
+            response.text().then(text => alert('Fel: ' + text));
+        }
+    })
+    .catch(err => console.error('Nätverksfel:', err));
+}
