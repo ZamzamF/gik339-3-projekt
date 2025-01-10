@@ -6,16 +6,15 @@ CREATE TABLE furniture (
    color VARCHAR(20) NOT NULL,
    category VARCHAR(20) NOT NULL,
    price DECIMAL(20,2) NOT NULL,
-   image VARCHAR(300) NOT NULL
 );
 
-INSERT INTO furniture (furnitureName, modelName, color, category, price, image) 
+INSERT INTO furniture (furnitureName, modelName, color, category, price) 
 VALUES 
-   ('Bed', 'Anja', 'Oak', 'Bedroom', 20000.00, 'client/Bilder/Sovrum/bed.jpg'),
-   ('Stool', 'Kajsa', 'Oak', 'Kitchen', 500.00, 'client/Bilder/Kitchen/Stool.jpg'),
-   ('Sofa', 'Bertil', 'Beige', 'Livingroom', 15000.00, 'client/Bilder/Vardagsrum/Sofa.jpg'),
-   ('Chair', 'Sofia', 'Oak', 'Livingroom', 10000.00, 'client/Bilder/Vardagsrum/chair.jpg'),
-   ('Hatch', 'Anna', 'Oak', 'Kitchen', 1600.00, 'client/Bilder/Kitchen/hatch.jpg'),
-   ('Lamp', 'Johannes', 'White', 'Bedroom', 500.00, 'client/Bilder/Sovrum/lamp.jpg');
+   ('Bed', 'Anja', 'Oak', 'Bedroom', 20000.00),
+   ('Stool', 'Kajsa', 'Oak', 'Kitchen', 500.00),
+   ('Sofa', 'Bertil', 'Beige', 'Livingroom', 15000.00'),
+   ('Chair', 'Sofia', 'Oak', 'Livingroom', 10000.00'),
+   ('Hatch', 'Anna', 'Oak', 'Kitchen', 1600.00),
+   ('Lamp', 'Johannes', 'White', 'Bedroom', 500.00);
 
 SELECT * FROM furniture; 
