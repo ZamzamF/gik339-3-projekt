@@ -12,8 +12,8 @@ INSERT INTO furniture (furnitureName, modelName, color, category, price)
 VALUES 
    ('Bed', 'Anja', 'Oak', 'Bedroom', 20000.00),
    ('Stool', 'Kajsa', 'Oak', 'Kitchen', 500.00),
-   ('Sofa', 'Bertil', 'Beige', 'Livingroom', 15000.00'),
-   ('Chair', 'Sofia', 'Oak', 'Livingroom', 10000.00'),
+   ('Sofa', 'Bertil', 'Beige', 'Livingroom', 15000.00),
+   ('Chair', 'Sofia', 'Oak', 'Livingroom', 10000.00),
    ('Hatch', 'Anna', 'Oak', 'Kitchen', 1600.00),
    ('Lamp', 'Johannes', 'White', 'Bedroom', 500.00);
 
