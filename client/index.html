@@ -3,120 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-
-
-
-    <title>Hej</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ZELT interior</title>
 </head>
-<body>
+<body class="">
 
-    <!-- Navigations meny -->
-    <nav class="navbar navbar-expand-lg navbar-custom">
-      <div class="container-fluid">
-        <!-- Logo - Förslag -->
-        <a class="navbar-brand" href="index.html">
-          <!-- Logo - SVG -->
-          <svg width="280" height="80" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
-            <title>ZELT interior - Minimalist Logo with Icon</title>
-            <desc>A stylized "Z" merges with the wordmark for a distinct brand marker.</desc>
-            
-            <!-- Stylized "Z" as an icon -->
-            <path 
-              d="M20 20 H50 L30 40 H60 L40 60 H20" 
-              fill="none"         stroke="#4F4F4F" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round"
-            />
-            
-            <!-- "ZELT interior" text next to the icon -->
-            <text 
-              x="70" 
-              y="40" 
-              font-family="Poppins, sans-serif" 
-              font-weight="600" 
-              font-size="28" 
-              fill="#4F4F4F"
-            >
-              ZELT
-            </text>
-            <text 
-              x="70" 
-              y="60" 
-              font-family="Poppins, sans-serif" 
-              font-weight="400" 
-              font-size="14" 
-              fill="#4F4F4F"
-            >
-              interior
-            </text>
-          </svg>
-        </a>
-        <!-- Toggle-knapp för responsivitet--> 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Länkar till övriga sidor-->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">   
-          </ul>
-      </div>
-      </div>
-    </nav>
- 
- <!-- Formulär --> 
-    <form id="resourceForm">
-      <div class="mb-3">
-        <label for="furnitureName" class="form-label">Möbel</label>
-        <input type="text" class="form-control" id="furnitureName" placeholder="Ange möbel" required>
-      </div>
-      <div class="mb-3">
-        <label for="color" class="form-label">Färg</label>
-        <input type="text" class="form-control" id="color" placeholder="Ange färg" required>
-      </div>
-      <div class="mb-3">
-        <label for="category" class="form-label">Kategori</label>
-        <input type="text" class="form-control" id="category" placeholder="Ange kategori" required>
-      </div>
-      <div class="mb-3">
-        <label for="price" class="form-label">Pris</label>
-        <input type="text" class="form-control" id="price" placeholder="Ange pris" required>
-      </div>
-
-      <!-- Formulärknappar -->
-      <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary" id="resetForm">Rensa fält</button>
-        <button type="submit" class="btn btn-primary">Lägg till</button>
-      </div>
-    </form>
-
-  <!-- Produkt lista som visar produkter baserat på kategori-->
-  <section>
-
-    <!-- Statisk behållare där produkter renderas dynamiskt -->
-     <div id="product-container"></div>
-  </section>
-
-  <!-- Produkt lista som visar alla produkter-->
-  <section>
-    <h2>Alla produkter: </h2>
-    <div id="all-products-container">
+  <header>
+     <!-- Logo - SVG -->
+     <svg width="280" height="80" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+      <title>ZELT interior - Minimalist Logo with Icon</title>
+      <desc>A stylized "Z" merges with the wordmark for a distinct brand marker.</desc>
       
+      <!-- Stylized "Z" as an icon -->
+      <path 
+        d="M20 20 H50 L30 40 H60 L40 60 H20" 
+        fill="none"         stroke="#4F4F4F" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+      />
+      
+      <!-- "ZELT interior" text next to the icon -->
+      <text 
+        x="70" 
+        y="40" 
+        font-family="Poppins, sans-serif" 
+        font-weight="600" 
+        font-size="28" 
+        fill="#4F4F4F"
+      >
+        ZELT
+      </text>
+      <text 
+        x="70" 
+        y="60" 
+        font-family="Poppins, sans-serif" 
+        font-weight="400" 
+        font-size="14" 
+        fill="#4F4F4F"
+      >
+        interior
+      </text>
+    </svg>
+  </header>
 
+  <main>
+
+    <div>
+      <form id="furnitureForm">
+
+        <div>
+          <label for="furnitureName" class="">Produkt namn:</label>
+          <input type="text" class="" name="furnitureName" placeholder="Ange produkt namn..." required>
+        </div>
+
+        <div>
+          <label for="price" class="">Pris:</label>
+          <input type="text" class="" name="price" placeholder="Ange pris..." required>
+        </div>
+
+        <div>
+          <label for="category" class="">Kategori:</label>
+          <select name="category">
+            <option value="bedrom">Sovrum</option>
+            <option value="kitchen">Kök</option>
+            <option value="livingroom">Vardagsrum</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="color" class="">Färg på produkt: </label>
+          <input type="text" class="" name="color" placeholder="Ange färg" required>
+        </div>
+  
+        <!-- Formulärknappar -->
+        <div class="">
+          <button type="reset" class="" name="resetFormFields">Rensa</button>
+          <button type="submit" class="" name="SubmitForm">Lägg till</button>
+        </div>
+      </form>
     </div>
-  </section>
 
+    <!-- Dynamic Storage Of Produks -->
+    <h2>Alla produkter: </h2>
+    <ul id="all-products-container"></ul>
+  </main>
+   
 
-
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="script.js"></script>
-
-
-
+  <script src="script.js"></script>
 </body>
 </html>
