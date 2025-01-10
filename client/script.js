@@ -148,11 +148,10 @@ function renderProductList() {
 
       // Hämta data från formuläret
       const formData = {
-        fname: document.getElementById('fname').value,
-        ename: document.getElementById('ename').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        password: document.getElementById('password').value
+        furnitureName: document.getElementById('furnitureName').value,
+        color: document.getElementById('color').value,
+        category: document.getElementById('category').value,
+        price: document.getElementById('price').value,
       };
 
       console.log('Formulärdata:', formData);

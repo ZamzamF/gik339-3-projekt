@@ -63,15 +63,15 @@ app.get('/furniture/:id', (req, res) => {
 //put-route  - uppdater baserat på id
 app.put('/furniture/:id', (req, res) => {
     const id = req.params.id;
-    const { furnitureName, price, image } = req.body;
+    const { furnitureName, price } = req.body;
   
     const sql = `
       UPDATE furniture
-      SET furnitureName = ?, price = ?, image = ?
+      SET furnitureName = ?, price = ?, 
       WHERE id = ?
     `;
   
-    db.run(sql, [furnitureName, price, image, id], function (err) {
+    db.run(sql, [furnitureName, price, id], function (err) {
       if (err) {
         return res.status(500).send(err);
       }
@@ -87,7 +87,7 @@ app.put('/furniture/:id', (req, res) => {
 app.post('/furniture', (req, res) => {
     const furniture = req.body;     
 
-    const sql = `INSERT INTO furniture(furnitureName, modelName, color, category, price, image) VALUES (?, ?, ?, ?, ?, ?)`;
+    const sql = `INSERT INTO furniture(furnitureName, modelName, color, category, price, image) VALUES (?, ?, ?, ?)`;
 
     db.run(sql, Object.values(furniture), (err) => {
         if (err) {
