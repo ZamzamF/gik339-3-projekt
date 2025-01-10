@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>ZELT interior</title>
 </head>
-<body class="">
+<body class="bg-amber-50">
 
   <header>
      <!-- Logo - SVG -->
@@ -50,7 +50,7 @@
   <main>
 
     <div>
-      <form id="furnitureForm">
+      <form id="furnitureForm" class="bg-stone-300	">
 
         <div>
           <label for="furnitureName" class="">Produkt namn:</label>
@@ -63,6 +63,11 @@
         </div>
 
         <div>
+          <label for="color" class="">Färg på produkt: </label>
+          <input type="text" class="" name="color" placeholder="Ange färg" required>
+        </div>
+
+        <div>
           <label for="category" class="">Kategori:</label>
           <select name="category">
             <option value="bedrom">Sovrum</option>
@@ -72,8 +77,8 @@
         </div>
 
         <div>
-          <label for="color" class="">Färg på produkt: </label>
-          <input type="text" class="" name="color" placeholder="Ange färg" required>
+          <label for="image">Ladda upp bild:</label>
+          <input type="file" name="image" accept="image/*" multiple>
         </div>
   
         <!-- Formulärknappar -->
@@ -86,7 +91,7 @@
 
     <!-- Dynamic Storage Of Produks -->
     <h2>Alla produkter: </h2>
-    <ul id="all-products-container"></ul>
+    <section id="all-products-container" class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" ></section>
   </main>
    
 

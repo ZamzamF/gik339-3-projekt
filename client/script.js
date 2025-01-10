@@ -48,11 +48,19 @@ async function fetchAllProducts(){
     //Renderar ut prdukterna 
     fetchedProducts.forEach((product) => {
         const productCards = `
-        <div class="">  
+        <div class="m-10 w-80 rounded-lg border border-gray-200 bg-amber-50 py-6 px-6 shadow-lg">  
+            <p class="text-lg font-bold text-green-800">${product.furnitureName}</p>
+            <p class="text-sm font-semibold text-green-700">Kategori: ${product.category}</p>
+            <p class="mt-3 text-2xl font-bold text-amber-900">${product.price}</p>
+            <p class="text-sm font-semibold text-green-600">Färg: ${product.color}</p>
 
-            <div class="">
-                <h5 class="">${product.furnitureName}</h5>
-                <p class="">Price:${product.price}</p> 
+            <div class="mt-6 flex justify-between">
+                <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800">
+                Ändra
+                </button>
+                <button class="w-1/2 ml-4 rounded-lg border-2 border-amber-800 bg-amber-800 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-900">
+                Ta bort
+                </button>
             </div>
         </div>
         `;
