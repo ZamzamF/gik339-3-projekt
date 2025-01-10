@@ -87,7 +87,7 @@ app.put('/furniture/:id', (req, res) => {
 app.post('/furniture', (req, res) => {
     const furniture = req.body;     
 
-    const sql = `INSERT INTO furniture(furnitureName, modelName, color, category, price, image) VALUES (?, ?, ?, ?)`;
+    const sql = `INSERT INTO furniture(furnitureName, modelName, color, category, price) VALUES (?, ?, ?, ?)`;
 
     db.run(sql, Object.values(furniture), (err) => {
         if (err) {
