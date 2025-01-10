@@ -17,6 +17,8 @@ const db = new sqlite3.Database('./furniture.db') // Skapar databaskoppling
 const cors = require('cors');
 app.use(cors());
 app.use('/client', express.static('client'));
+app.use(express.json());
+
 
 
 
@@ -29,23 +31,103 @@ db.all('SELECT * FROM furniture', (e, rows) =>
 );
 
 
+
+
+
+//get-route - Alla produkter
+app.get('/furniture', (req, res) =>{
+    const sql = 'SELECT * FROM furniture';
+    db.all(sql,(err, rows) => {
+        if (err){
+            res.status(500).json({ error: err.message });
+        } else {
+            res.json(rows);
+        }
+    }) 
+})
+
+//get-route baserat på id
+app.get('/furniture/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = 'SELECT * FROM furniture WHERE id = ?';
+    db.get(sql, [id], (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+        } else if (row) {
+            res.json(row);
+        } else {
+            res.status(404).json({ error: 'Resurs hittades inte' });
+        }
+    });
+}); 
+
+
+//put-route  - uppdater baserat på id
+app.put('/furniture/:id', (req, res) => {
+    const id = req.params.id;
+    const { furnitureName, price, image } = req.body;
+  
+    const sql = `
+      UPDATE furniture
+      SET furnitureName = ?, price = ?, image = ?
+      WHERE id = ?
+    `;
+  
+    db.run(sql, [furnitureName, price, image, id], function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      if (this.changes > 0) {
+        res.status(200).json({ message: 'Produkten har uppdaterats!'});
+      } else {
+        res.status(404).json({ message: 'Kunde inte hitta produkten att uppdatera.'});
+      }
+    });
+});
+
+  
+
+//post-route - skapa en ny resurs
+app.post('/furniture', (req, res) => {
+    const furniture = req.body;     
+
+    const sql = `INSERT INTO furniture(furnitureName, modelName, color, category, price, image) VALUES (?, ?, ?, ?, ?, ?)`;
+
+    db.run(sql, Object.values(furniture), (err) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Ett fel inträffade');
+        } else {
+            res.send('Produkten skapades');
+        }
+        });
+}); 
+
+//delete-route - tabort
+app.delete('/furniture/:id', (req, res) => {
+    const furnitureId = req.params.id;
+    const sql = 'DELETE FROM furniture WHERE id = ?';
+
+    db.run(sql, [furnitureId], function (err) {
+        if (err) {
+            res.status(500).send('Fel vid radering: ' + err.message);
+        } else if (this.changes === 0) {
+            res.status(404).send('Möbeln med inmatat ID hittades inte.');
+        } else {
+            res.status(200).send("Möbeln med ID ${furnitureId} har tagits bort.");
+        }
+    });
+});
+
+
+
+
 // Skapar porten 3000
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
 
 
-/* Skapar get-api med databasen som endpoint för att testa databaskopplingen i porten*/
-app.get('/furniture', (req, res) =>{
-    const sql = 'SELECT * FROM furniture';
-    db.all(sql,(err, rows) => {
-        if (err){
-            res.status(500).send (err);   
-        } else {
-            res.send(rows);
-        }
-    }) 
-})
 
 //get-route id/kategor
 

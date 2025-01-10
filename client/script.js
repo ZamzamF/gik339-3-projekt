@@ -1,3 +1,6 @@
+//Global variabel för bas-urlen : /furniture
+const baseUrl = "http://localhost:3000/furniture";
+
 
  //Ev lista med produkter från databasen 
 let products = [
@@ -180,7 +183,7 @@ async function fetchAllProducts(){
 
 
     //Skapar HTTP-GET-Förfrågan. Lagrar object-data i variabeln response
-    const response = await fetch("http://localhost:3000/furniture");  
+    const response = await fetch(baseUrl);  
     //Översätter object-data till json-format.
     const fetchedProducts = await response.json();
 
