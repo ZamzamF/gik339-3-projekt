@@ -254,7 +254,7 @@ app.delete('/furniture/:id', (req, res) => {
         if (err) {
             res.status(500).send('Fel vid radering: ' + err.message);
         } else if (this.changes === 0) {
-            res.status(404).send('Möbeln med angivet ID hittades inte.');
+            res.status(404).send('Möbeln med inmatat ID hittades inte.');
         } else {
             res.status(200).send(`Möbeln med ID ${furnitureId} har tagits bort.`);
         }
