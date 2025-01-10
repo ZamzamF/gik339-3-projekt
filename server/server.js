@@ -44,8 +44,7 @@ app.get('/furniture', (req, res) =>{
             res.json(rows);
         }
     }) 
-})
-
+})  
 //get-route baserat på id
 app.get('/furniture/:id', (req, res) => {
     const { id } = req.params;
@@ -60,7 +59,6 @@ app.get('/furniture/:id', (req, res) => {
         }
     });
 }); 
-
 
 //put-route  - uppdater baserat på id
 app.put('/furniture/:id', (req, res) => {
@@ -84,8 +82,6 @@ app.put('/furniture/:id', (req, res) => {
       }
     });
 });
-
-  
 
 //post-route - skapa en ny resurs
 app.post('/furniture', (req, res) => {
@@ -119,23 +115,7 @@ app.delete('/furniture/:id', (req, res) => {
     });
 });
 
-
-
-
-// Skapar porten 3000
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
-});
-
-
-
-//get-route id/kategor
-
-//put-route  - uppdater
-
-//post-route - skapa
-
-//delete-route - tabort
+//delete-route - tabort 
 app.delete('/furniture/:id', (req, res) => {
     const furnitureId = req.params.id;
     const sql = 'DELETE FROM furniture WHERE id = ?';
@@ -152,6 +132,10 @@ app.delete('/furniture/:id', (req, res) => {
 });
 
 
+// Skapar porten 3000
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+}); 
 
 /* app.use(express.json()); */
 

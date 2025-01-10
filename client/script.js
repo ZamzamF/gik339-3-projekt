@@ -269,7 +269,7 @@ app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
 
-// Radera möbel via formuläret
+// Radera möbel via formuläret 
 function deleteFurniture(id) {
     fetch(`http://localhost:3000/furniture/${id}`, {
         method: 'DELETE'
