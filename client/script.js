@@ -94,9 +94,9 @@ document.getElementById('updateButton').addEventListener('click', async () => {
           category,
         }),
       });
-  
+      
+      // modalrutan
       if (response.ok) {
-        // modalrutan
         const modal = document.getElementById('updateModal');
         modal.classList.remove('hidden');
       } else {
@@ -116,6 +116,9 @@ document.getElementById('updateButton').addEventListener('click', async () => {
 //anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
 document.addEventListener("DOMContentLoaded", fetchAllProducts);
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> parent of 01be11c (Uppdate mot server)
