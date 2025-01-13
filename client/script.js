@@ -74,25 +74,36 @@ async function fetchAllProducts(){
 
 async function deleteProduct(id) {
   try {
-      // Skickar DELETE-förfrågan och väntar på resultatet:
-      const response = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
-      // Kontrollerar om förfrågan lyckades
+      // Skickar DELETE-förfrågan och väntar på resultatet
+      const response = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' });
+      // Kontrollera om förfrågan lyckades
       if (!response.ok) {
-          // Om förfrågan misslyckas, visar error
           throw new Error(`Fel vid radering: ${response.status}`);
       }
       // Hämtar meddelandet från servern (app.delete) som text
       const message = await response.text();
-      // Visar meddelandet från servern i en alert
-      alert(message);
-      // Uppdaterar produktlistan genom att hämta alla produkter igen
+
+      // Öppnar modal och visar meddelandet
+      openDeleteModal(message);
+      // Uppdaterar produktlistan
       fetchAllProducts();
   } catch (error) {
       // Loggar eventuella fel
       console.error('Ett fel inträffade: ', error);
   }
 }
-
+// Öppnar delete-modalen och sätter meddelandet
+function openDeleteModal(message) {
+    // Sätter meddelandet i modalen
+    document.getElementById('modalMessage').innerText = message;
+    // Visar modalen genom att ta bort "hidden"-klassen
+    document.getElementById('deleteModal').classList.remove('hidden');
+}
+// Stänger modalen
+function closeModal() {
+    // Lägger till "hidden"-klassen för att stänga modalen
+    document.getElementById('deleteModal').classList.add('hidden');
+}
 
 
 // knappkoppling för att uppdatera produkt i databasen
