@@ -72,49 +72,50 @@ async function fetchAllProducts(){
 }
 }
 
+// knappkoppling för att uppdatera produkt i databasen
+document.getElementById('updateButton').addEventListener('click', async () => {
+    
+    const furnitureName = document.querySelector('input[name="furnitureName"]').value;
+    const price = document.querySelector('input[name="price"]').value;
+    const color = document.querySelector('input[name="color"]').value;
+    const category = document.querySelector('select[name="category"]').value;
+    const id = 1;
+  
+    try {
+      const response = await fetch(`${baseUrl}/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          furnitureName,
+          price,
+          color,
+          category,
+        }),
+      });
+  
+      if (response.ok) {
+        // modalrutan
+        const modal = document.getElementById('updateModal');
+        modal.classList.remove('hidden');
+      } else {
+        console.error('Misslyckades med att uppdatera produkten.');
+      }
+    } catch (error) {
+      console.error('Ett fel inträffade:', error);
+    }
+  });
+  
+  // stänga modalrutan
+  document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('updateModal').classList.add('hidden');
+  });
+
+
 //anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
 document.addEventListener("DOMContentLoaded", fetchAllProducts);
 
 
-/*document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('all-products-container').addEventListener('click', async (e) => {
-        if (e.target.innerText === 'Ändra') {
-            const productCard = e.target.closest('div'); // Hitta närmaste div (produkten)
-            const furnitureId = productCard.dataset.id; // Anta att varje div har ett data-id-attribut
 
-            
-            const newFurnitureName = prompt('Ange nytt produktnamn:');
-            const newPrice = prompt('Ange nytt pris:');
-            const newImage = prompt('Ange ny bild-URL:');
-
-            if (newFurnitureName && newPrice && newImage) {
-                try {
-                    const response = await fetch(`${baseUrl}/${furnitureId}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            furnitureName: newFurnitureName,
-                            price: newPrice,
-                            image: newImage,
-                        }),
-                    });
-
-                    if (response.ok) {
-                        alert('Produkten har uppdaterats!');
-                        fetchAllProducts(); // Ladda om produktlistan
-                    } else {
-                        const error = await response.json();
-                        alert('Fel vid uppdatering: ' + error.message);
-                    }
-                } catch (error) {
-                    console.error('Nätverksfel:', error);
-                }
-            } else {
-                alert('Uppdateringen avbröts.');
-            }
-        }
-    });
-}); */
 
