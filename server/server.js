@@ -25,7 +25,7 @@ app.get('/furniture', (req, res) =>{
     }) 
 }); 
 //get-route - hämta en specific product baserat på id - Onädigt?
-app.get('/furniture/:id', (req, res) => {
+/* app.get('/furniture/:id', (req, res) => {
     const { id } = req.params;
     const sql = 'SELECT * FROM furniture WHERE id = ?';
     db.get(sql, [id], (err, row) => {
@@ -37,7 +37,7 @@ app.get('/furniture/:id', (req, res) => {
             res.status(404).json({ error: 'Resurs hittades inte' });
         }
     });
-}); 
+}); */ 
 
 //put-route  - uppdater product baserat på id
 app.put('/furniture/:id', (req, res) => {
