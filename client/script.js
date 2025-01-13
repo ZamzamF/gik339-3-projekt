@@ -88,7 +88,7 @@ function closeModal() {
 console.log(furnitureForm);
 furnitureForm.addEventListener('submit', handleSubmit);
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
   const serverFurnitureObject = {
     furnitureName: '',
