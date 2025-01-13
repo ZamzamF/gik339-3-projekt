@@ -45,20 +45,23 @@ async function fetchAllProducts(){
     console.log("OBS! Produkterna gick inte att hämta ut!", error);
 }
 }
-
+//DELETE-----------------------------------------------------------------------
 async function deleteProduct(id) {
   try {
-      // Skickar DELETE-förfrågan och väntar på resultatet
+      // Skickar DELETE-förfrågan och väntar på resultat
       const response = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' });
+
       // Kontrollera om förfrågan lyckades
       if (!response.ok) {
           throw new Error(`Fel vid radering: ${response.status}`);
       }
-      // Hämtar meddelandet från servern (app.delete) som text
+
+      // Hämtar meddelandet från servern som text
       const message = await response.text();
 
       // Öppnar modal och visar meddelandet
       openDeleteModal(message);
+
       // Uppdaterar produktlistan
       fetchAllProducts();
   } catch (error) {
@@ -66,19 +69,21 @@ async function deleteProduct(id) {
       console.error('Ett fel inträffade: ', error);
   }
 }
-// Öppnar delete-modalen och sätter meddelandet
+
+// Öppnar modalen och sätter meddelandet
 function openDeleteModal(message) {
     // Sätter meddelandet i modalen
     document.getElementById('modalMessage').innerText = message;
     // Visar modalen genom att ta bort "hidden"-klassen
     document.getElementById('deleteModal').classList.remove('hidden');
 }
+
 // Stänger modalen
 function closeModal() {
     // Lägger till "hidden"-klassen för att stänga modalen
     document.getElementById('deleteModal').classList.add('hidden');
 }
-
+//----------------------------------------------------------------
 // funktion lägga till produkt
 console.log(furnitureForm);
 furnitureForm.addEventListener('submit', handleSubmit);
@@ -106,18 +111,18 @@ async function handleSubmit(e) {
   });
   
   try {
-    const response = await fetch(request); // Skicka förfrågan
+    const response = await fetch(request);
     console.log(response);
-  
+
     if (response.ok) {
-      await fetchAllProducts(); // Uppdatera produktlistan
-      furnitureForm.reset();    // Återställ formuläret
+        await fetchAllProducts(); // Hämta produkterna igen
+        furnitureForm.reset();    // Återställ formuläret
     } else {
-      console.error("Ett fel inträffade vid POST-förfrågan:", response.statusText);
+        console.error("Ett fel inträffade vid POST-förfrågan:", response.statusText);
     }
-  } catch (error) {
-    console.error("OBS! Ett fel inträffade:", error); // Hantera eventuella fel
-  }
+} catch (error) {
+    console.error("OBS! Ett fel inträffade:", error);
+}
 }
 
 
@@ -161,29 +166,6 @@ document.getElementById('updateButton').addEventListener('click', async () => {
     document.getElementById('updateModal').classList.add('hidden');
   });
 
-function deleteProduct(id) {
-  // Skapat funktion som skickar en DELETE-förfrågan till servern för att ta bort baserat på id
-  fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
-  .then((response) => {
-      // Kontrollerar om förfrågan lyckades
-      if (!response.ok) {
-          // Om förfrågan misslyckas:
-          throw new Error(`Fel vid radering: ${response.status}`);
-      }
-      // Returnerar svarstexten från servern (app.delete) för vidare behandling
-      return response.text();
-  })
-  .then((message) => {
-      // Visar meddelandet från servern i en alert från app.delete
-      alert(message);
-      // Uppdaterar produktlistan genom att hämta alla produkter igen
-      fetchAllProducts();
-  })
-  .catch((error) => {
-      // Loggar eventuella fel 
-      console.error('Ett fel inträffade: ', error);
-  });
-}
 //anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
 document.addEventListener("DOMContentLoaded", fetchAllProducts);
 

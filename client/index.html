@@ -84,11 +84,6 @@
       </form>
     </div>
 
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> parent of 01be11c (Uppdate mot server)
     <!-- Dynamic Storage Of Produks -->
     <h2>Alla produkter: </h2>
     <section id="all-products-container" class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4" ></section>
@@ -100,6 +95,17 @@
         <button id="closeModal" class="mt-4 bg-green-700 text-white py-2 px-4 rounded">Stäng</button>
       </div>
     </div>
+    <!-- Modalruta vid uppdatering -->
+    <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+      <div class="bg-white p-6 rounded-lg w-96">
+        <button class="absolute top-2 right-2 text-gray-500" onclick="closeModal()">&times;</button>
+        <p id="modalMessage" class="text-lg font-semibold text-center"></p> <!-- Här sätts meddelandet från servern -->
+        <div class="flex justify-center mt-4">
+          <button onclick="closeModal()" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">Stäng</button>
+        </div>
+      </div>
+    </div>
+
 
   </main>
    
