@@ -7,6 +7,7 @@ CREATE TABLE furniture (
    price DECIMAL(20,2) NOT NULL,
 );
 
+
 INSERT INTO furniture (furnitureName, color, category, price) 
 VALUES 
    ('Bed', 'Pink', 'Bedroom', 20000.00),
