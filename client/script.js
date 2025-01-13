@@ -166,29 +166,6 @@ document.getElementById('updateButton').addEventListener('click', async () => {
     document.getElementById('updateModal').classList.add('hidden');
   });
 
-function deleteProduct(id) {
-  // Skapat funktion som skickar en DELETE-förfrågan till servern för att ta bort baserat på id
-  fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
-  .then((response) => {
-      // Kontrollerar om förfrågan lyckades
-      if (!response.ok) {
-          // Om förfrågan misslyckas:
-          throw new Error(`Fel vid radering: ${response.status}`);
-      }
-      // Returnerar svarstexten från servern (app.delete) för vidare behandling
-      return response.text();
-  })
-  .then((message) => {
-      // Visar meddelandet från servern i en alert från app.delete
-      alert(message);
-      // Uppdaterar produktlistan genom att hämta alla produkter igen
-      fetchAllProducts();
-  })
-  .catch((error) => {
-      // Loggar eventuella fel 
-      console.error('Ett fel inträffade: ', error);
-  });
-}
 //anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
 document.addEventListener("DOMContentLoaded", fetchAllProducts);
 
