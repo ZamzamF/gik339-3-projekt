@@ -58,9 +58,9 @@ async function fetchAllProducts(){
                 <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800">
                 Ändra
                 </button>
-                <button class="w-1/2 ml-4 rounded-lg border-2 border-amber-800 bg-amber-800 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-900">
-                Ta bort
-                </button>
+              
+                <button class="w-1/2 ml-4 rounded-lg border-2 border-amber-800 bg-amber-800 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-900" onClick="deleteProduct(${product.id})">Ta bort</button>
+
             </div>
         </div>
         `;
@@ -71,6 +71,31 @@ async function fetchAllProducts(){
     console.log("OBS! Produkterna gick inte att hämta ut!", error);
 }
 }
+
+function deleteProduct(id) {
+  // Skapat funktion som skickar en DELETE-förfrågan till servern för att ta bort baserat på id
+  fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
+  .then((response) => {
+      // Kontrollerar om förfrågan lyckades
+      if (!response.ok) {
+          // Om förfrågan misslyckas:
+          throw new Error(`Fel vid radering: ${response.status}`);
+      }
+      // Returnerar svarstexten från servern (app.delete) för vidare behandling
+      return response.text();
+  })
+  .then((message) => {
+      // Visar meddelandet från servern i en alert från app.delete
+      alert(message);
+      // Uppdaterar produktlistan genom att hämta alla produkter igen
+      fetchAllProducts();
+  })
+  .catch((error) => {
+      // Loggar eventuella fel 
+      console.error('Ett fel inträffade: ', error);
+  });
+}
+
 
 // knappkoppling för att uppdatera produkt i databasen
 document.getElementById('updateButton').addEventListener('click', async () => {

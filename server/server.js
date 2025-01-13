@@ -94,7 +94,7 @@ app.delete('/furniture/:id', (req, res) => {
         } else if (this.changes === 0) {
             res.status(404).send('Möbeln med inmatat ID hittades inte.');
         } else {
-            res.status(200).send("Möbeln med ID ${furnitureId} har tagits bort.");
+            res.status(200).send(`Möbeln med ID ${furnitureId} har tagits bort.`);
         }
     });
 });
