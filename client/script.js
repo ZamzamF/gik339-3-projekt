@@ -80,7 +80,6 @@ function closeModal() {
 }
 
 // funktion lägga till produkt
-//furnitureForm heter formuläret id med knapp type submit och name SubmitForm
 console.log(furnitureForm);
 furnitureForm.addEventListener('submit', handleSubmit);
 
