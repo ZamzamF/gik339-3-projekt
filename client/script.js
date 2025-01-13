@@ -83,7 +83,7 @@ function closeModal() {
 console.log(furnitureForm);
 furnitureForm.addEventListener('submit', handleSubmit);
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
   const serverFurnitureObject = {
     furnitureName: '',
@@ -106,18 +106,18 @@ function handleSubmit(e) {
   });
   
   try {
-    const response = await fetch(request);
+    const response = await fetch(request); // Skicka förfrågan
     console.log(response);
-
+  
     if (response.ok) {
-        await fetchAllProducts(); // Hämta produkterna igen
-        furnitureForm.reset();    // Återställ formuläret
+      await fetchAllProducts(); // Uppdatera produktlistan
+      furnitureForm.reset();    // Återställ formuläret
     } else {
-        console.error("Ett fel inträffade vid POST-förfrågan:", response.statusText);
+      console.error("Ett fel inträffade vid POST-förfrågan:", response.statusText);
     }
-} catch (error) {
-    console.error("OBS! Ett fel inträffade:", error);
-}
+  } catch (error) {
+    console.error("OBS! Ett fel inträffade:", error); // Hantera eventuella fel
+  }
 }
 
 
