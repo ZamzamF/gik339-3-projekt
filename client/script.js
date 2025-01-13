@@ -46,28 +46,37 @@ async function fetchAllProducts(){
 }
 }
 
-function deleteProduct(id) {
-  // Skapat funktion som skickar en DELETE-förfrågan till servern för att ta bort baserat på id
-  fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
-  .then((response) => {
-      // Kontrollerar om förfrågan lyckades
+async function deleteProduct(id) {
+  try {
+      // Skickar DELETE-förfrågan och väntar på resultatet
+      const response = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' });
+      // Kontrollera om förfrågan lyckades
       if (!response.ok) {
-          // Om förfrågan misslyckas:
           throw new Error(`Fel vid radering: ${response.status}`);
       }
-      // Returnerar svarstexten från servern (app.delete) för vidare behandling
-      return response.text();
-  })
-  .then((message) => {
-      // Visar meddelandet från servern i en alert från app.delete
-      alert(message);
-      // Uppdaterar produktlistan genom att hämta alla produkter igen
+      // Hämtar meddelandet från servern (app.delete) som text
+      const message = await response.text();
+
+      // Öppnar modal och visar meddelandet
+      openDeleteModal(message);
+      // Uppdaterar produktlistan
       fetchAllProducts();
-  })
-  .catch((error) => {
-      // Loggar eventuella fel 
+  } catch (error) {
+      // Loggar eventuella fel
       console.error('Ett fel inträffade: ', error);
-  });
+  }
+}
+// Öppnar delete-modalen och sätter meddelandet
+function openDeleteModal(message) {
+    // Sätter meddelandet i modalen
+    document.getElementById('modalMessage').innerText = message;
+    // Visar modalen genom att ta bort "hidden"-klassen
+    document.getElementById('deleteModal').classList.remove('hidden');
+}
+// Stänger modalen
+function closeModal() {
+    // Lägger till "hidden"-klassen för att stänga modalen
+    document.getElementById('deleteModal').classList.add('hidden');
 }
 
 // funktion lägga till produkt

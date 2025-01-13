@@ -8,15 +8,10 @@ app.use(cors());
 app.use('/client', express.static('client'));
 app.use(express.json());
 
-
-
 /* Kontrollerar databaskopplingen i konsolen 
 db.all('SELECT * FROM furniture', (e, rows) => 
     console.log(rows)
 ); */
-
-
-
 
 //get-route - hämta lla produkter
 app.get('/furniture', (req, res) =>{
@@ -82,7 +77,7 @@ app.post('/furniture', (req, res) => {
         });
 });  
 
-//delete-route - tabort product
+//delete-route - ta bort product
 app.delete('/furniture/:id', (req, res) => {
     const furnitureId = req.params.id;
     const sql = 'DELETE FROM furniture WHERE id = ?';
@@ -97,9 +92,6 @@ app.delete('/furniture/:id', (req, res) => {
         }
     });
 });
-
-
-
 
 
 // Lyssnar vid porten 3000
