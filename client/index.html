@@ -6,9 +6,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>ZELT interior</title>
 </head>
-<body class="bg-amber-50">
+<body class="bg-amber-50 flex flex-col items-center justify-center min-h-screen">
 
-  <header>
+  <header class="mb-8">
      <!-- Logo - SVG -->
      <svg width="280" height="80" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
       <title>ZELT interior - Minimalist Logo with Icon</title>
@@ -47,45 +47,39 @@
     </svg>
   </header>
 
-  <main>
+  <main class="w-full flex flex-col items-center">
 
-    <div>
-      <form id="furnitureForm" class="bg-stone-300	">
+    <div class="w-full max-w-md bg-stone-300 rounded-lg p-6 shadow-lg mb-8">
+      <form id="furnitureForm" class="space-y-4">
 
         <div>
-          <label for="furnitureName" class="">Produkt namn:</label>
-          <input type="text" class="" name="furnitureName" placeholder="Ange produkt namn..." required>
+          <label for="furnitureName" class="block text-sm font-medium text-gray-800 mb-1">Produkt namn:</label>
+          <input type="text" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" name="furnitureName" placeholder="Ange produkt namn..." required>
         </div>
 
         <div>
-          <label for="price" class="">Pris:</label>
-          <input type="text" class="" name="price" placeholder="Ange pris..." required>
+          <label for="price" class="block text-sm font-medium text-gray-800 mb-1">Pris:</label>
+          <input type="text" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" name="price" placeholder="Ange pris..." required>
         </div>
 
         <div>
-          <label for="color" class="">Färg på produkt: </label>
-          <input type="text" class="" name="color" placeholder="Ange färg" required>
+          <label for="color" class="block text-sm font-medium text-gray-800 mb-1">Färg på produkt: </label>
+          <input type="text" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" name="color" placeholder="Ange färg" required>
         </div>
 
         <div>
-          <label for="category" class="">Kategori:</label>
-          <select name="category">
+          <label for="category" class="block text-sm font-medium text-gray-800 mb-1">Kategori:</label>
+          <select name="category" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700">
             <option value="bedrom">Sovrum</option>
             <option value="kitchen">Kök</option>
             <option value="livingroom">Vardagsrum</option>
           </select>
         </div>
-
-        <div>
-          <label for="image">Ladda upp bild:</label>
-          <input type="file" name="image" accept="image/*" multiple>
-        </div>
   
         <!-- Formulärknappar -->
-        <div class="">
-          <button type="reset" class="" name="resetFormFields">Rensa</button>
-          <button type="submit" class="" name="SubmitForm">Lägg till</button>
-          <button id="updateButton" type="button" name="updateForm">Uppdatera</button>
+        <div class="flex justify-end space-x-2 pt-2">
+          <button type="reset" name="resetFormFields" class="rounded-lg border-2 border-amber-800 bg-amber-800 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-900">Rensa</button>
+          <button type="submit" name="SubmitForm" class="rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800">Lägg till</button>
         </div>
       </form>
     </div>
@@ -97,7 +91,7 @@
 >>>>>>> parent of 01be11c (Uppdate mot server)
     <!-- Dynamic Storage Of Produks -->
     <h2>Alla produkter: </h2>
-    <section id="all-products-container" class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" ></section>
+    <section id="all-products-container" class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4" ></section>
 
     <!-- Modalruta vid uppdatering -->
     <div id="updateModal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
