@@ -72,29 +72,27 @@ async function fetchAllProducts(){
 }
 }
 
-function deleteProduct(id) {
-  // Skapat funktion som skickar en DELETE-förfrågan till servern för att ta bort baserat på id
-  fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
-  .then((response) => {
+async function deleteProduct(id) {
+  try {
+      // Skickar DELETE-förfrågan och väntar på resultatet:
+      const response = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
       // Kontrollerar om förfrågan lyckades
       if (!response.ok) {
-          // Om förfrågan misslyckas:
+          // Om förfrågan misslyckas, visar error
           throw new Error(`Fel vid radering: ${response.status}`);
       }
-      // Returnerar svarstexten från servern (app.delete) för vidare behandling
-      return response.text();
-  })
-  .then((message) => {
-      // Visar meddelandet från servern i en alert från app.delete
+      // Hämtar meddelandet från servern (app.delete) som text
+      const message = await response.text();
+      // Visar meddelandet från servern i en alert
       alert(message);
       // Uppdaterar produktlistan genom att hämta alla produkter igen
       fetchAllProducts();
-  })
-  .catch((error) => {
-      // Loggar eventuella fel 
+  } catch (error) {
+      // Loggar eventuella fel
       console.error('Ett fel inträffade: ', error);
-  });
+  }
 }
+
 
 
 // knappkoppling för att uppdatera produkt i databasen
