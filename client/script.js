@@ -96,6 +96,40 @@ function deleteProduct(id) {
   });
 }
 
+// funktion lägga till produkt
+//furnitureForm heter formuläret id med knapp type submit och name SubmitForm
+console.log(furnitureForm);
+furnitureForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const serverFurnitureObject = {
+    furnitureName: '',
+    price:'',
+    color:'',
+    category:'',
+  };
+  serverFurnitureObject.furnitureName = furnitureForm.furnitureName.value;
+  serverFurnitureObject.price = furnitureForm.price.value;
+  serverFurnitureObject.color = furnitureForm.color.value;
+  serverFurnitureObject.category = furnitureForm.category.value;
+
+  console.log(serverFurnitureObject);
+  const request = new Request(baseUrl,{
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(serverFurnitureObject)
+  });
+  
+  fetch(request).then(response => {
+    console.log(response);
+    fetchAllProducts();
+    furnitureForm.reset();
+  });
+}
+
 
 // knappkoppling för att uppdatera produkt i databasen
 document.getElementById('updateButton').addEventListener('click', async () => {
@@ -137,10 +171,32 @@ document.getElementById('updateButton').addEventListener('click', async () => {
     document.getElementById('updateModal').classList.add('hidden');
   });
 
-
+function deleteProduct(id) {
+  // Skapat funktion som skickar en DELETE-förfrågan till servern för att ta bort baserat på id
+  fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
+  .then((response) => {
+      // Kontrollerar om förfrågan lyckades
+      if (!response.ok) {
+          // Om förfrågan misslyckas:
+          throw new Error(`Fel vid radering: ${response.status}`);
+      }
+      // Returnerar svarstexten från servern (app.delete) för vidare behandling
+      return response.text();
+  })
+  .then((message) => {
+      // Visar meddelandet från servern i en alert från app.delete
+      alert(message);
+      // Uppdaterar produktlistan genom att hämta alla produkter igen
+      fetchAllProducts();
+  })
+  .catch((error) => {
+      // Loggar eventuella fel 
+      console.error('Ett fel inträffade: ', error);
+  });
+}
 //anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
-document.addEventListener("DOMContentLoaded", fetchAllProducts);
-
+document.addEventListener("DOMContentLoaded", () => { fetchAllProducts();
+});
 
 
 

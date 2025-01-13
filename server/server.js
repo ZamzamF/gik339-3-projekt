@@ -69,9 +69,8 @@ app.put('/furniture/:id', (req, res) => {
 
 //post-route - skapa en ny produkt
 app.post('/furniture', (req, res) => {
-    const furniture = req.body;     
-
-    const sql = `INSERT INTO furniture(furnitureName, modelName, color, category, price) VALUES (?, ?, ?, ?)`;
+    const furniture = req.body;
+    const sql = `INSERT INTO furniture(furnitureName, color, category, price) VALUES (?, ?, ?, ?)`;
 
     db.run(sql, Object.values(furniture), (err) => {
         if (err) {
@@ -81,7 +80,7 @@ app.post('/furniture', (req, res) => {
             res.send('Produkten skapades');
         }
         });
-}); 
+});  
 
 //delete-route - tabort product
 app.delete('/furniture/:id', (req, res) => {
