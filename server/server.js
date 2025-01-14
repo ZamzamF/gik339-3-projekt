@@ -75,7 +75,7 @@ app.post('/furniture', (req, res) => {
             res.send('Produkten skapades');
         }
         });
-});  
+});   
 
 //delete-route - ta bort product
 app.delete('/furniture/:id', (req, res) => {

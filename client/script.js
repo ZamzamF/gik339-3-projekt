@@ -91,15 +91,11 @@ furnitureForm.addEventListener('submit', handleSubmit);
 async function handleSubmit(e) {
   e.preventDefault();
   const serverFurnitureObject = {
-    furnitureName: '',
-    price:'',
-    color:'',
-    category:'',
-  };
-  serverFurnitureObject.furnitureName = furnitureForm.furnitureName.value;
-  serverFurnitureObject.price = furnitureForm.price.value;
-  serverFurnitureObject.color = furnitureForm.color.value;
-  serverFurnitureObject.category = furnitureForm.category.value;
+    furnitureName: furnitureForm.furnitureName.value,
+    price: furnitureForm.price.value,
+    color: furnitureForm.color.value,
+    category: furnitureForm.category.value,
+};
 
   console.log(serverFurnitureObject);
   const request = new Request(baseUrl,{
