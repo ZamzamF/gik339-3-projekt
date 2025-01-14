@@ -108,7 +108,7 @@ async function handleSubmit(e) { // Definierar en funktion för att hantera form
   
   try {
     const response = await fetch(request); // // Utför HTTP-förfrågan
-    console.log(response);
+    console.log(response); // visar response i konsolen
 
     if (response.ok) {
         await fetchAllProducts(); // Hämta produkterna igen
