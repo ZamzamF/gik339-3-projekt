@@ -28,8 +28,7 @@ async function fetchAllProducts(){
 
             <div class="mt-4 flex justify-between">
                 <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800" onClick="updateProduct(${product.id})">Ändra</button>
-                Ändra
-                </button>
+
               
                 <button class="w-1/2 ml-4 rounded-lg border-2 border-amber-800 bg-amber-800 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-900" onClick="deleteProduct(${product.id})">Ta bort</button>
 
