@@ -8,10 +8,10 @@ app.use(cors());
 app.use('/client', express.static('client'));
 app.use(express.json());
 
-/* Kontrollerar databaskopplingen i konsolen 
+// Kontrollerar databaskopplingen i konsolen 
 db.all('SELECT * FROM furniture', (e, rows) => 
     console.log(rows)
-); */
+); 
 
 //get-route - hämta lla produkter
 app.get('/furniture', (req, res) =>{
@@ -25,7 +25,7 @@ app.get('/furniture', (req, res) =>{
     }) 
 }); 
 //get-route - hämta en specific product baserat på id - Onädigt?
-/* app.get('/furniture/:id', (req, res) => {
+app.get('/furniture/:id', (req, res) => {
     const { id } = req.params;
     const sql = 'SELECT * FROM furniture WHERE id = ?';
     db.get(sql, [id], (err, row) => {
@@ -37,7 +37,7 @@ app.get('/furniture', (req, res) =>{
             res.status(404).json({ error: 'Resurs hittades inte' });
         }
     });
-}); */ 
+}); 
 
 //put-route  - uppdater product baserat på id
 app.put('/furniture/:id', (req, res) => {
@@ -75,7 +75,8 @@ app.post('/furniture', (req, res) => {
             res.send('Produkten skapades');
         }
         });
-});  
+});   
+
 
 //delete-route - ta bort product
 app.delete('/furniture/:id', (req, res) => {
