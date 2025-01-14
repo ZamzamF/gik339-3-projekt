@@ -27,7 +27,7 @@ async function fetchAllProducts(){
             <p class="text-sm font-semibold text-green-600">Färg: ${product.color}</p>
 
             <div class="mt-4 flex justify-between">
-                <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800">
+                <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800" onClick="updateProduct(${product.id})">Ändra</button>
                 Ändra
                 </button>
               
