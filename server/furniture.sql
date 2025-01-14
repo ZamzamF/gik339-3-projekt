@@ -4,7 +4,7 @@ CREATE TABLE furniture (
    furnitureName VARCHAR(20) NOT NULL,
    color VARCHAR(20) NOT NULL,
    category VARCHAR(20) NOT NULL,
-   price DECIMAL(20,2) NOT NULL,
+   price DECIMAL(20,2) NOT NULL
 );
 
 

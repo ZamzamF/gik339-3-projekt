@@ -95,7 +95,7 @@ async function handleSubmit(e) {
     price: furnitureForm.price.value,
     color: furnitureForm.color.value,
     category: furnitureForm.category.value,
-};
+  }
 
   console.log(serverFurnitureObject);
   const request = new Request(baseUrl,{
