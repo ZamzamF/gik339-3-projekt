@@ -96,7 +96,7 @@ document.getElementById('furnitureForm').addEventListener('submit', async functi
     try { 
       const response = await fetch(furnitureId?`${baseUrl}/${furnitureId}`:baseUrl, 
         { method: furnitureId? 'PUT' : 'POST',
-          headers: {'Conent-Type': 'application/json'},
+          headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(furnitureProduct)
         });
         const result = await response.json();    
