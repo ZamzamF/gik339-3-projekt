@@ -85,12 +85,12 @@ function closeModal() {
 }
 //----------------------------------------------------------------
 // funktion lägga till produkt
-console.log(furnitureForm);
-furnitureForm.addEventListener('submit', handleSubmit);
+console.log(furnitureForm); // loggar formuläret 
+furnitureForm.addEventListener('submit', handleSubmit); // Lägger till en event-lyssnare för formuläret och kopplar det till funktionen handleSubmit
 
-async function handleSubmit(e) {
+async function handleSubmit(e) { // Definierar en funktion för att hantera formulärets "submit"-händelse
   e.preventDefault();
-  const serverFurnitureObject = {
+  const serverFurnitureObject = { //   // Skapar ett objekt för data som ska skickas till servern
     furnitureName: furnitureForm.furnitureName.value,
     price: furnitureForm.price.value,
     color: furnitureForm.color.value,
@@ -98,7 +98,7 @@ async function handleSubmit(e) {
   }
 
   console.log(serverFurnitureObject);
-  const request = new Request(baseUrl,{
+  const request = new Request(baseUrl,{ //// Skapar en Request för att skicka data till servern med POST-metoden
     method: 'POST',
     headers: {
       'content-type': 'application/json'
@@ -107,7 +107,7 @@ async function handleSubmit(e) {
   });
   
   try {
-    const response = await fetch(request);
+    const response = await fetch(request); // // Utför HTTP-förfrågan
     console.log(response);
 
     if (response.ok) {
