@@ -11,7 +11,15 @@ app.use(express.json());
 // Kontrollerar databaskopplingen i konsolen 
 db.all('SELECT * FROM furniture', (e, rows) => 
     console.log(rows)
-); 
+);  
+
+/* db.run (`CREATE TABLE furniture 
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   furnitureName VARCHAR(20) NOT NULL,
+   color VARCHAR(20) NOT NULL,
+   category VARCHAR(20) NOT NULL,
+   price DECIMAL(20,2) NOT NULL
+`); */
 
 //get-route - hämta lla produkter
 app.get('/furniture', (req, res) =>{
@@ -95,8 +103,8 @@ app.delete('/furniture/:id', (req, res) => {
 });
 
 
-// Lyssnar vid porten 3000
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+// Lyssnar vid porten 4000
+app.listen(4000, () => {
+    console.log('Server is running on http://localhost:4000');
 }); 
 

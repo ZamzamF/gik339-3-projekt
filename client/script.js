@@ -1,7 +1,5 @@
 //Global variabel för bas-urlen : /furniture
-const baseUrl = "http://localhost:3000/furniture";
-
-
+const baseUrl = "http://localhost:4000/furniture";
 
 // ------------------- Dynamiskt rendering av produkter ---------
 
@@ -45,6 +43,8 @@ async function fetchAllProducts(){
     console.log("OBS! Produkterna gick inte att hämta ut!", error);
 }
 }
+//anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
+document.addEventListener("DOMContentLoaded", fetchAllProducts);
 //DELETE-----------------------------------------------------------------------
 async function deleteProduct(id) {
   try {
@@ -84,46 +84,31 @@ function closeModal() {
     document.getElementById('deleteModal').classList.add('hidden');
 }
 //----------------------------------------------------------------
-// funktion lägga till produkt
-console.log(furnitureForm); // loggar formuläret 
-furnitureForm.addEventListener('submit', handleSubmit); // Lägger till en event-lyssnare för formuläret och kopplar det till funktionen handleSubmit
-
-async function handleSubmit(e) { // Definierar en funktion för att hantera formulärets "submit"-händelse
+// funktion lägga till produkt 
+document.getElementById('furnitureForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const serverFurnitureObject = { //   // Skapar ett objekt för data som ska skickas till servern
-    furnitureName: furnitureForm.furnitureName.value,
-    price: furnitureForm.price.value,
-    color: furnitureForm.color.value,
-    category: furnitureForm.category.value,
-  }
-
-  console.log(serverFurnitureObject);
-  const request = new Request(baseUrl,{ //// Skapar en Request för att skicka data till servern med POST-metoden
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(serverFurnitureObject)
-  });
-  
-  try {
-    const response = await fetch(request); // // Utför HTTP-förfrågan
-    console.log(response); // visar response i konsolen
-
-    if (response.ok) {
-        await fetchAllProducts(); // Hämta produkterna igen
-        furnitureForm.reset();    // Återställ formuläret
-    } else {
-        console.error("Ett fel inträffade vid POST-förfrågan:", response.statusText);
+  const furnitureId = furnitureForm.id.value; 
+  const furnitureName = furnitureForm.furnitureName.value;
+  const price = furnitureForm.price.value; 
+  const color = furnitureForm.color.value;
+  const category = furnitureForm.category.value;
+  const furnitureProduct = {furnitureName, price, color, category};
+    try { 
+      const response = await fetch(furnitureId?`${baseUrl}/${furnitureId}`:baseUrl, 
+        { method: furnitureId? 'PUT' : 'POST',
+          headers: {'Conent-Type': 'application/json'},
+          body: JSON.stringify(furnitureProduct)
+        });
+        const result = await response.json();    
+        alert(result.message);
+        fetchAllProducts();
+    } catch (error) {
+      console.error('Produkten laddas inte upp/uppdateras: ', error);
     }
-} catch (error) {
-    console.error("OBS! Ett fel inträffade:", error);
-}
-}
-
-
+}); 
+      
 // knappkoppling för att uppdatera produkt i databasen
-document.getElementById('updateButton').addEventListener('click', async () => {
+/* document.getElementById('updateButton').addEventListener('click', async () => {
     
     const furnitureName = document.querySelector('input[name="furnitureName"]').value;
     const price = document.querySelector('input[name="price"]').value;
@@ -160,10 +145,9 @@ document.getElementById('updateButton').addEventListener('click', async () => {
   // stänga modalrutan
   document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('updateModal').classList.add('hidden');
-  });
+  }); */
 
-//anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
-document.addEventListener("DOMContentLoaded", fetchAllProducts);
+
 
 
 
