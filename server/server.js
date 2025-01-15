@@ -69,7 +69,7 @@ app.post('/furniture', (req, res) => {
             console.log(err);
             res.status(500).send('Ett fel inträffade');
         } else {
-            res.send('Produkten skapades');
+            res.json({ message: 'Produkten skapades' });
         }
         });
 });   
