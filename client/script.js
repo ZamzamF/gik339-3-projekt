@@ -27,8 +27,8 @@ async function fetchAllProducts(){
             <p class="text-sm font-semibold text-green-600">Färg: ${product.color}</p>
 
             <div class="mt-4 flex justify-between">
-                <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800" onClick="updateProduct(${product.id})">Ändra</button>
-
+                <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800" onClick="handlleFormForUpdate(${product.id})">Ändra</button>
+                </button>
               
                 <button class="w-1/2 ml-4 rounded-lg border-2 border-amber-800 bg-amber-800 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-900" onClick="deleteProduct(${product.id})">Ta bort</button>
 
@@ -83,10 +83,10 @@ function closeModal() {
     document.getElementById('deleteModal').classList.add('hidden');
 }
 //----------------------------------------------------------------
-// funktion lägga till produkt 
+// funktion lägga till och uppdatera produkt 
 document.getElementById('furnitureForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const furnitureId = furnitureForm.id.value; 
+  const furnitureId = furnitureForm.dataset.id || null; 
   const furnitureName = furnitureForm.furnitureName.value;
   const price = furnitureForm.price.value; 
   const color = furnitureForm.color.value;
@@ -101,10 +101,31 @@ document.getElementById('furnitureForm').addEventListener('submit', async functi
         const result = await response.json();    
         alert(result.message);
         fetchAllProducts();
+
+        // Rensar formuläret och dataset-id
+        form.reset();
+        delete form.dataset.id;
     } catch (error) {
       console.error('Produkten laddas inte upp/uppdateras: ', error);
     }
 }); 
+
+// förbereder själva formuläret för uppdatering
+async function handlleFormForUpdate(id) {
+  try {
+    const response = await fetch(`${baseUrl}/${id}`);
+    const product = await response.json();
+
+    const form = document.getElementById("furnitureForm");
+    form.furnitureName.value = product.furnitureName;
+    form.price.value = product.price;
+    form.color.value = product.color;
+    form.category.value = product.category;
+    form.dataset.id = id; // Lagrar id för uppdatering
+  } catch (error) {
+    console.error("Kunde inte hämta produkt för uppdatering", error);
+  }
+}
       
 // knappkoppling för att uppdatera produkt i databasen
 /* document.getElementById('updateButton').addEventListener('click', async () => {

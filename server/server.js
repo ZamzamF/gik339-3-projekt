@@ -13,13 +13,6 @@ db.all('SELECT * FROM furniture', (e, rows) =>
     console.log(rows)
 );  
 
-/* db.run (`CREATE TABLE furniture 
-   id INTEGER PRIMARY KEY AUTOINCREMENT,
-   furnitureName VARCHAR(20) NOT NULL,
-   color VARCHAR(20) NOT NULL,
-   category VARCHAR(20) NOT NULL,
-   price DECIMAL(20,2) NOT NULL
-`); */
 
 //get-route - hämta lla produkter
 app.get('/furniture', (req, res) =>{
@@ -49,31 +42,27 @@ app.get('/furniture/:id', (req, res) => {
 
 //put-route  - uppdater product baserat på id
 app.put('/furniture/:id', (req, res) => {
-    const id = req.params.id;
-    const { furnitureName, price } = req.body;
+    const { id } = req.params;
+    const { furnitureName, price, color, category } = req.body;
   
-    const sql = `
-      UPDATE furniture
-      SET furnitureName = ?, price = ?, 
-      WHERE id = ?
-    `;
+    const sql = 'UPDATE furniture SET furnitureName = ?, price = ?, color = ?, category = ? WHERE id = ?';
+
   
-    db.run(sql, [furnitureName, price, id], function (err) {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      if (this.changes > 0) {
-        res.status(200).json({ message: 'Produkten har uppdaterats!'});
-      } else {
-        res.status(404).json({ message: 'Kunde inte hitta produkten att uppdatera.'});
-      }
+    db.run(sql, [furnitureName, price, color, category, id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+          } else {
+            res.json({ message: 'Produkt uppdaterad!' });
+          }
     });
 });
+
 
 //post-route - skapa en ny produkt
 app.post('/furniture', (req, res) => {
     const furniture = req.body;
-    const sql = `INSERT INTO furniture(furnitureName, color, category, price) VALUES (?, ?, ?, ?)`;
+    //Ändrade prdningen rätt
+    const sql = `INSERT INTO furniture(furnitureName, category, price, color) VALUES (?, ?, ?, ?)`;
 
     db.run(sql, Object.values(furniture), (err) => {
         if (err) {
