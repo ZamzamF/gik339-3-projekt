@@ -53,64 +53,42 @@
       <form id="furnitureForm" class="space-y-4">
 
         <div>
-          <label for="furnitureName" class="block text-sm font-medium text-gray-800 mb-1">Produkt namn:</label>
+          <label for="furnitureName" class="block text-sm font-medium text-gray-800 mb-1">Product name:</label>
           <input type="text" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" name="furnitureName" placeholder="Ange produkt namn..." required>
         </div>
 
         <div>
-          <label for="price" class="block text-sm font-medium text-gray-800 mb-1">Pris:</label>
-          <input type="text" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" name="price" placeholder="Ange pris..." required>
+          <label for="price" class="block text-sm font-medium text-gray-800 mb-1">Price:</label>
+          <input type="number" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" name="price" placeholder="Ange pris..." required>
         </div>
 
         <div>
-          <label for="color" class="block text-sm font-medium text-gray-800 mb-1">Färg på produkt: </label>
-          <input type="text" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" name="color" placeholder="Ange färg" required>
+          <label for="color" class="block text-sm font-medium text-gray-800 mb-1">Product color: </label>
+          <input type="text" id="colorInput" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" name="color" placeholder="Ange färg" required>
         </div>
 
         <div>
-          <label for="category" class="block text-sm font-medium text-gray-800 mb-1">Kategori:</label>
+          <label for="category" class="block text-sm font-medium text-gray-800 mb-1">Category:</label>
           <select name="category" class="w-full rounded-lg border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700">
-            <option value="bedroom">Sovrum</option>
-            <option value="kitchen">Kök</option>
-            <option value="livingroom">Vardagsrum</option>
+            <option value="bedroom">Bedroom</option>
+            <option value="kitchen">Kitchen</option>
+            <option value="livingroom">Livingroom/option>
           </select>
         </div>
   
         <!-- Formulärknappar -->
         <div class="flex justify-end space-x-2 pt-2">
-          <button type="reset" name="resetFormFields" class="rounded-lg border-2 border-amber-800 bg-amber-800 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-900">Rensa</button>
-          <button type="submit" name="SubmitForm" class="rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800">Lägg till</button>
+          <button type="reset" name="resetFormFields" class="rounded-lg border-2 border-amber-800 bg-amber-800 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-900">Reset</button>
+          <button type="submit" name="SubmitForm" class="rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800">Add</button>
         </div>
       </form>
     </div>
 
     <!-- Dynamic Storage Of Produks -->
-    <h2>Alla produkter: </h2>
-    <section id="all-products-container" class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4" ></section>
+    <h2>Products available: </h2>
+    <section id="all-products-container" class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4" >
 
-
-
-
-
-
-
-    <!-- Modalruta vid uppdatering -->
-    <div id="updateModal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div class="bg-white p-6 rounded shadow-lg text-center">
-        <p class="text-lg font-semibold">Produkten är uppdaterad!</p>
-        <button id="closeModal" class="mt-4 bg-green-700 text-white py-2 px-4 rounded">Stäng</button>
-      </div>
-    </div>
-    <!-- Modalruta vid ta bort -->
-    <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-      <div class="bg-white p-6 rounded-lg w-96">
-        <button class="absolute top-2 right-2 text-gray-500" onclick="closeModal()">&times;</button>
-        <p id="modalMessage" class="text-lg font-semibold text-center"></p> <!-- Här sätts meddelandet från servern -->
-        <div class="flex justify-center mt-4">
-          <button onclick="closeModal()" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">Stäng</button>
-        </div>
-      </div>
-    </div>
+    </section>
   </main>
    
 

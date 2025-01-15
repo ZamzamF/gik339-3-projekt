@@ -5,7 +5,6 @@ const db = new sqlite3.Database('./furniture.db') // Skapar databaskoppling
 
 const cors = require('cors');
 app.use(cors());
-app.use('/client', express.static('client'));
 app.use(express.json());
 
 // Kontrollerar databaskopplingen i konsolen 
@@ -25,7 +24,9 @@ app.get('/furniture', (req, res) =>{
         }
     }) 
 }); 
-//get-route - hämta en specific product baserat på id - Onädigt?
+
+
+//get-route - hämta en specific product baserat på id
 app.get('/furniture/:id', (req, res) => {
     const { id } = req.params;
     const sql = 'SELECT * FROM furniture WHERE id = ?';
@@ -60,11 +61,11 @@ app.put('/furniture/:id', (req, res) => {
 
 //post-route - skapa en ny produkt
 app.post('/furniture', (req, res) => {
-    const { furnitureName, category, price, color} = req.body;
-    //Ändrade ordningen rätt
+    const { furnitureName,category, price, color } = req.body;
+    //Ändrade prdningen rätt
     const sql = `INSERT INTO furniture(furnitureName, category, price, color) VALUES (?, ?, ?, ?)`;
 
-    db.run(sql,[furnitureName, category, price, color], (err) => {
+    db.run(sql,[furnitureName,category, price, color], (err) => {
         if (err) {
             console.log(err);
             res.status(500).send('Ett fel inträffade');
@@ -83,10 +84,8 @@ app.delete('/furniture/:id', (req, res) => {
     db.run(sql, [furnitureId], function (err) {
         if (err) {
             res.status(500).send('Fel vid radering: ' + err.message);
-        } else if (this.changes === 0) {
-            res.status(404).send('Möbeln med inmatat ID hittades inte.');
         } else {
-            res.status(200).send(`Möbeln med ID ${furnitureId} har tagits bort.`);
+            res.json({ message: 'Produkten raderades'});
         }
     });
 });

@@ -1,8 +1,11 @@
 //Global variabel för bas-urlen : /furniture
 const baseUrl = "http://localhost:4000/furniture";
 
-// ------------------- Dynamiskt rendering av produkter ---------
+window.addEventListener('load', fetchAllProducts);
+//anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
+//document.addEventListener("DOMContentLoaded", fetchAllProducts);
 
+// ------------------- Funktion som renderar ut alla produkter ---------
 async function fetchAllProducts(){
     // Hämtar upp det element som agerar som behållare för alla produkter
     const fullProductList = document.getElementById("all-products-container");
@@ -22,9 +25,9 @@ async function fetchAllProducts(){
         const productCards = `
         <div class="m-10 w-80 rounded-lg border border-gray-200 bg-amber-50 py-3 px-3 shadow-lg">  
             <p class="text-lg font-bold text-green-800">${product.furnitureName}</p>
-            <p class="text-sm font-semibold text-green-700">Kategori: ${product.category}</p>
-            <p class="mt-3 text-1xl font-bold text-amber-900">Pris: ${product.price}</p>
-            <p class="text-sm font-semibold text-green-600">Färg: ${product.color}</p>
+            <p class="text-sm font-semibold text-green-700">Category: ${product.category}</p>
+            <p class="mt-3 text-1xl font-bold text-amber-900">Price: ${product.price} SEK</p>
+            <p class="text-sm font-semibold style="color:${product.color}" >Color: ${product.color}</p>
 
             <div class="mt-4 flex justify-between">
                 <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800" onClick="handlleFormForUpdate(${product.id})">Ändra</button>
@@ -36,54 +39,14 @@ async function fetchAllProducts(){
         </div>
         `;
     fullProductList.innerHTML += productCards;
-    });
-
+    }); 
   } catch (error) {  
     console.log("OBS! Produkterna gick inte att hämta ut!", error);
 }
 }
-//anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
-document.addEventListener("DOMContentLoaded", fetchAllProducts);
-//DELETE-----------------------------------------------------------------------
-async function deleteProduct(id) {
-  try {
-      // Skickar DELETE-förfrågan och väntar på resultat
-      const response = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' });
 
-      // Kontrollera om förfrågan lyckades
-      if (!response.ok) {
-          throw new Error(`Fel vid radering: ${response.status}`);
-      }
 
-      // Hämtar meddelandet från servern som text
-      const message = await response.text();
-
-      // Öppnar modal och visar meddelandet
-      openDeleteModal(message);
-
-      // Uppdaterar produktlistan
-      fetchAllProducts();
-  } catch (error) {
-      // Loggar eventuella fel
-      console.error('Ett fel inträffade: ', error);
-  }
-}
-
-// Öppnar modalen och sätter meddelandet
-function openDeleteModal(message) {
-    // Sätter meddelandet i modalen
-    document.getElementById('modalMessage').innerText = message;
-    // Visar modalen genom att ta bort "hidden"-klassen
-    document.getElementById('deleteModal').classList.remove('hidden');
-}
-
-// Stänger modalen
-function closeModal() {
-    // Lägger till "hidden"-klassen för att stänga modalen
-    document.getElementById('deleteModal').classList.add('hidden');
-}
-//----------------------------------------------------------------
-// funktion lägga till och uppdatera produkt 
+// ------------------- Funktion som lägger till och uppdatera produkt  ---------
 document.getElementById('furnitureForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const furnitureId = furnitureForm.dataset.id || null; 
@@ -110,7 +73,7 @@ document.getElementById('furnitureForm').addEventListener('submit', async functi
     }
 }); 
 
-// förbereder själva formuläret för uppdatering
+//  Funktion som förbereder formuläret för uppdatering
 async function handlleFormForUpdate(id) {
   try {
     const response = await fetch(`${baseUrl}/${id}`);
@@ -126,46 +89,35 @@ async function handlleFormForUpdate(id) {
     console.error("Kunde inte hämta produkt för uppdatering", error);
   }
 }
-      
-// knappkoppling för att uppdatera produkt i databasen
-/* document.getElementById('updateButton').addEventListener('click', async () => {
-    
-    const furnitureName = document.querySelector('input[name="furnitureName"]').value;
-    const price = document.querySelector('input[name="price"]').value;
-    const color = document.querySelector('input[name="color"]').value;
-    const category = document.querySelector('select[name="category"]').value;
-    const id = 1;
-  
-    try {
-      const response = await fetch(`${baseUrl}/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          furnitureName,
-          price,
-          color,
-          category,
-        }),
-      });
-      
-      // modalrutan
-      if (response.ok) {
-        const modal = document.getElementById('updateModal');
-        modal.classList.remove('hidden');
-      } else {
-        console.error('Misslyckades med att uppdatera produkten.');
+
+// ------------------- Funktion som raderar produkt  ---------
+async function deleteProduct(id) {
+  try {
+      // Skickar DELETE-förfrågan och väntar på resultat
+      const response = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' });
+
+      // Kontrollera om förfrågan lyckades
+      if (!response.ok) {
+          throw new Error(`Fel vid radering: ${response.status}`);
       }
-    } catch (error) {
-      console.error('Ett fel inträffade:', error);
-    }
-  });
-  
-  // stänga modalrutan
-  document.getElementById('closeModal').addEventListener('click', () => {
-    document.getElementById('updateModal').classList.add('hidden');
-  }); */
+
+      // Hämtar meddelandet från servern som text
+      const message = await response.json();
+
+      // Öppnar modal och visar meddelandet
+      //openDeleteModal(message);
+      alert(message.message);
+
+      // Uppdaterar produktlistan
+      fetchAllProducts();
+  } catch (error) {
+      // Loggar eventuella fel
+      console.error('Ett fel inträffade: ', error);
+  }
+}
+
+
+      
 
 
 
