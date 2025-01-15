@@ -23,7 +23,7 @@ async function fetchAllProducts(){
         <div class="m-10 w-80 rounded-lg border border-gray-200 bg-amber-50 py-3 px-3 shadow-lg">  
             <p class="text-lg font-bold text-green-800">${product.furnitureName}</p>
             <p class="text-sm font-semibold text-green-700">Kategori: ${product.category}</p>
-            <p class="mt-3 text-1xl font-bold text-amber-900">${product.price}</p>
+            <p class="mt-3 text-1xl font-bold text-amber-900">Pris: ${product.price}</p>
             <p class="text-sm font-semibold text-green-600">Färg: ${product.color}</p>
 
             <div class="mt-4 flex justify-between">
@@ -91,7 +91,7 @@ document.getElementById('furnitureForm').addEventListener('submit', async functi
   const price = furnitureForm.price.value; 
   const color = furnitureForm.color.value;
   const category = furnitureForm.category.value;
-  const furnitureProduct = {furnitureName, price, color, category};
+  const furnitureProduct = {furnitureName, category, price, color};
     try { 
       const response = await fetch(furnitureId?`${baseUrl}/${furnitureId}`:baseUrl, 
         { method: furnitureId? 'PUT' : 'POST',

@@ -60,11 +60,11 @@ app.put('/furniture/:id', (req, res) => {
 
 //post-route - skapa en ny produkt
 app.post('/furniture', (req, res) => {
-    const furniture = req.body;
+    const { furnitureName, price, color, category } = req.body;
     //Ändrade prdningen rätt
     const sql = `INSERT INTO furniture(furnitureName, category, price, color) VALUES (?, ?, ?, ?)`;
 
-    db.run(sql, Object.values(furniture), (err) => {
+    db.run(sql,[furnitureName, price, color, category, id], (err) => {
         if (err) {
             console.log(err);
             res.status(500).send('Ett fel inträffade');
