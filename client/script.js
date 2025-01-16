@@ -3,14 +3,13 @@ const baseUrl = "http://localhost:4000/furniture";
 
 window.addEventListener('load', fetchAllProducts);
 //anropa fetchAllProducts automatiskt varje gång HTML-sidan ladda.
-//document.addEventListener("DOMContentLoaded", fetchAllProducts);
 
 // ------------------- Funktion som renderar ut alla produkter ---------
 async function fetchAllProducts(){
     // Hämtar upp det element som agerar som behållare för alla produkter
     const fullProductList = document.getElementById("all-products-container");
     // Töm innehållet i behållaren först
-  fullProductList.innerHTML = "";
+    fullProductList.innerHTML = "";
 
   try {
 
@@ -27,8 +26,7 @@ async function fetchAllProducts(){
             <p class="text-lg font-bold text-green-800">${product.furnitureName}</p>
             <p class="text-sm font-semibold text-green-700">Category: ${product.category}</p>
             <p class="mt-3 text-1xl font-bold text-amber-900">Price: ${product.price} SEK</p>
-            <p class="text-sm font-semibold style="color:${product.color}" >Color: ${product.color}</p>
-
+            <p class="text-sm font-semibold" style="color: ${product.color}">Color: ${product.color}</p>
             <div class="mt-4 flex justify-between">
                 <button class="w-1/2 rounded-lg border-2 border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white hover:bg-green-800" onClick="handlleFormForUpdate(${product.id})">Ändra</button>
                 </button>
@@ -44,7 +42,6 @@ async function fetchAllProducts(){
     console.log("OBS! Produkterna gick inte att hämta ut!", error);
 }
 }
-
 
 // ------------------- Funktion som lägger till och uppdatera produkt  ---------
 document.getElementById('furnitureForm').addEventListener('submit', async function(e) {
